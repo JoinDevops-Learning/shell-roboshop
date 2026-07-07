@@ -53,13 +53,13 @@ VALIDATE $? "Changing directory to /app"
 rm -rf /app/*
 VALIDATE $? "Cleaning /app directory"
 
-unzip /tmp/cart.zip &>> $LOGS_FILE
-VALIDATE $? "Extracting cart code"
+unzip /tmp/user.zip &>> $LOGS_FILE
+VALIDATE $? "Extracting user code"
 
 npm install &>> $LOGS_FILE
 VALIDATE $? "Installing npm dependencies"
 
-cp ${SCRIPT_DIR}/cart.service /etc/systemd/system/cart.service &>> $LOGS_FILE
+cp ${SCRIPT_DIR}/user.service /etc/systemd/system/user.service &>> $LOGS_FILE
 VALIDATE $? "created systemctl service"
 
 systemctl daemon-reload 
