@@ -59,7 +59,7 @@ VALIDATE $? "Extracting user code"
 npm install &>> $LOGS_FILE
 VALIDATE $? "Installing npm dependencies"
 
-cp SCRIPT_DIR/user.service /etc/systemd/system/user.service &>> $LOGS_FILE
+cp ${SCRIPT_DIR}/user.service /etc/systemd/system/user.service &>> $LOGS_FILE
 VALIDATE $? "created systemctl service"
 
 systemctl daemon-reload 
