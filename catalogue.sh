@@ -27,8 +27,8 @@ VALIDATE(){
     fi
 }
 
-dnf module disable nodejs -y &>> $LOGS_FILE
-VALIDATE $? "Disabling nodejs module"
+#dnf module disable nodejs -y &>> $LOGS_FILE
+#VALIDATE $? "Disabling nodejs module"
 
 dnf module enable nodejs:20 -y &>> $LOGS_FILE
 VALIDATE $? "Enabling nodejs module"
