@@ -46,12 +46,6 @@ VALIDATE $? "Creating /app directory"
 
 curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
 VALIDATE $? "downloading cart code"
-rm -rf /app/*
-VALIDATE $? "Cleaning /app directory"
-
-cd /app 
-unzip /tmp/cart.zip
-VALIDATE $? "downloading cart code"
 
 cd /app 
 VALIDATE $? "Changing directory to /app"
@@ -59,13 +53,16 @@ VALIDATE $? "Changing directory to /app"
 rm -rf /app/*
 VALIDATE $? "Cleaning /app directory"
 
-unzip /tmp/user.zip &>> $LOGS_FILE
-VALIDATE $? "Extracting user code"
+cd /app 
+VALIDATE $? "Changing directory to /app"
+
+unzip /tmp/cart.zip
+VALIDATE $? "Extracting cart code"
 
 npm install &>> $LOGS_FILE
 VALIDATE $? "Installing npm dependencies"
 
-cp ${SCRIPT_DIR}/user.service /etc/systemd/system/user.service &>> $LOGS_FILE
+cp ${SCRIPT_DIR}/cart.service /etc/systemd/system/cart.service &>> $LOGS_FILE
 VALIDATE $? "created systemctl service"
 
 systemctl daemon-reload 
