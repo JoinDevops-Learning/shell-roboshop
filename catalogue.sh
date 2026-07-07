@@ -8,6 +8,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+SCRIPT_DIR=$(pwd)
+MONGODB_HOST=mongodb.balumahendradevops.online
+
 if [ $USERID -ne 0 ]; then
     echo -e "$R Please run this script with root user access $N" | tee -a $LOGS_FILE
     exit 1
@@ -59,7 +62,7 @@ VALIDATE $? "Extracting catalogue code"
 npm install &>> $LOGS_FILE
 VALIDATE $? "Installing npm dependencies"
 
-cp catalogue.service /etc/systemd/system/catalogue.service &>> $LOGS_FILE
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGS_FILE
 VALIDATE $? "created systemctl service"
 
 systemctl daemon-reload 
