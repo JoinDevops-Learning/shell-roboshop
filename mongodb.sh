@@ -24,16 +24,16 @@ VALIDATE(){
     fi
 }
 
-cp mongodb.repo /etc/yum.repos.d/mongodb.repo 
+cp mongodb.repo /etc/yum.repos.d/mongodb.repo &>> $LOGS_FILE
 VALIDATE $? "Copying mongodb.repo"
 
-dnf install mongodb-org -y
+dnf install mongodb-org -y &>> $LOGS_FILE
 VALIDATE $? "Installing mongodb-org"
 
 systemctl enable mongod
 VALIDATE $? "Enabling mongod service"
 
-systemctl start mongod
+systemctl start mongod &>> $LOGS_FILE
 VALIDATE $? "Starting mongod service"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
