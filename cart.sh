@@ -44,7 +44,13 @@ fi
 mkdir -p /app
 VALIDATE $? "Creating /app directory"
 
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+VALIDATE $? "downloading cart code"
+rm -rf /app/*
+VALIDATE $? "Cleaning /app directory"
+
+cd /app 
+unzip /tmp/cart.zip
 VALIDATE $? "downloading cart code"
 
 cd /app 
