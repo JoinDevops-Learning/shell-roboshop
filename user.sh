@@ -8,6 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+SCRIPT_DIR=$(pwd)
 if [ $USERID -ne 0 ]; then
     echo -e "$R Please run this script with root user access $N" | tee -a $LOGS_FILE
     exit 1
@@ -61,11 +62,7 @@ VALIDATE $? "Installing npm dependencies"
 cp SCRIPT_DIR/user.service /etc/systemd/system/user.service &>> $LOGS_FILE
 VALIDATE $? "created systemctl service"
 
-systemctl daemon-reload &>> $LOGS_FILE
-validate $? "Reloading systemctl daemon"
-
+systemctl daemon-reload 
 systemctl enable user &>> $LOGS_FILE
-VALIDATE $? "Enabling user service"
-
-systemctl start user &>> $LOGS_FILE
+systemctl start user 
 VALIDATE $? "Starting user service"
