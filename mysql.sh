@@ -32,5 +32,9 @@ systemctl start mysqld  &>> $LOGS_FILE
 VALIDATE $? "Starting mysql service"
 
 # get the password from the user use read command to get the password from the user and store it in a variable
-mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOGS_FILE
+mysql -uroot <<EOF &>> $LOGS_FILE
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';
+FLUSH PRIVILEGES;
+EOF
+
 VALIDATE $? "Setting mysql root password"
